@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
   import '../app.css';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
+
   const svelteLogo = "/svelte.svg";
 
   // Define navigation items
@@ -11,7 +12,7 @@
   ];
 
   // Function to check if a route is active
-  function isActive(href, currentPath) {
+  function isActive(href: string, currentPath: string) {
     if (href === '/') {
       return currentPath === '/';
     }
@@ -35,11 +36,11 @@
             <a 
               href={item.href} 
               class="block px-5 py-3 font-semibold no-underline rounded-md transition-colors {
-                isActive(item.href, $page.url.pathname) 
+                isActive(item.href, page.url.pathname)
                   ? 'bg-blue-100 text-blue-700 border border-blue-200' 
                   : 'text-gray-700 hover:bg-gray-100'
               }"
-              aria-current={isActive(item.href, $page.url.pathname) ? 'page' : undefined}
+              aria-current={isActive(item.href, page.url.pathname) ? 'page' : undefined}
             >
               {item.label}
             </a>
